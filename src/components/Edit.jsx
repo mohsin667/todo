@@ -7,7 +7,6 @@ function Edit({state,setState}) {
     })
     let temp = [...state];
     temp[findOpen[0].id - 1].pop = false 
-    // console.log(state,findOpen)
     setState(temp)
   }
   return (
