@@ -1,11 +1,16 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import { SlOptionsVertical } from 'react-icons/sl'
-import { useSelector } from 'react-redux'
 import Form from './Form';
+import Edit from "./Edit";
+import { useDispatch, useSelector } from "react-redux";
+import {editPopUpOpen} from "../actions/todoAction";
 function Todo() {
+  const dispatch = useDispatch()
+  const handlePop = (id) => {
+    dispatch(editPopUpOpen(id))
+  }
   const state = useSelector((store)=>store.todos);
-    useEffect(()=> {
-  },[])
+
   return (
     <>
       <div className='bg-gray-100 rounded-md md:w-[calc(100%-200px)] mt-[10px] p-[15px] flex flex-wrap items-start gap-[15px] flex-col md:flex-row'>
@@ -13,7 +18,10 @@ function Todo() {
             return <div key={index} className='p-[10px] self-stretch rounded-md bg-[#D1E5F7] text-sm md:w-[calc(100%/3-10px)] flex flex-col'>
               <div className='flex justify-between items-start'>
               <h3>{data.title}</h3>
-              <SlOptionsVertical  className='mt-[5px] cursor-pointer' />
+                <div className='relative'>
+                  <SlOptionsVertical onClick={()=> handlePop(index)} className='mt-[5px] cursor-pointer' />
+                  {data.pop && <Edit id={index} />}
+                </div>
               </div>
               <p>{data.description}</p>
               <div className='flex justify-between items-center mt-3 ml-[-5px]'>
