@@ -15,6 +15,7 @@ function Form() {
     setTitle("")
     setDescription("")
     setPriority("Select Priority")
+
     let color = ""
     if(priority==="high"){
         color = "#f87171"
@@ -25,11 +26,14 @@ function Form() {
     if(priority==="low") {
         color = "#65cdaa"
     }
+
     const obj = {
         title: title,
         description: description,
         priority: priority,
-        color: color
+        color: color,
+        pop: false,
+        completed: false
     }
     dispatch(todoAction(obj))
     dispatch(closeDialogAction(false))
