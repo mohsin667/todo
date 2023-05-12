@@ -10,14 +10,12 @@ function Todo() {
   const handleDelete = (id) => {
     dispatch(deleteTodo(id))
   }
-  const handlePop = (id) => {
-    dispatch(editPopUpOpen(id))
-  }
+
   const {todos,selectedFilter} = useSelector((store)=>store.todos);
   const [state,setState] = useState(todos)
   const [popUpIndex,setPopUpIndex] = useState(null)
-  const handleChange = (e,index) => {
-    dispatch(taskCompleted({completed: e.target.checked,index}))
+  const handleChange = (e,index,id) => {
+    dispatch(taskCompleted({completed: e.target.checked,index:index,id:id}))
   }
 
   useEffect(()=> {
@@ -55,7 +53,7 @@ function Todo() {
               <p>{data.description}</p>
               <div className='flex justify-between items-center mt-3 ml-[-5px]'>
                 <label htmlFor={data.id} className='inline-flex'>
-                    <input id={data.id} type="checkbox" onChange={(e)=> handleChange(e,index)} checked={data.completed ? true : false} className="checked:bg-blue-500 relative left-1 w-4 mr-2" />
+                    <input id={data.id} type="checkbox" onChange={(e)=> handleChange(e,index,data.id)} checked={data.completed ? true : false} className="checked:bg-blue-500 relative left-1 w-4 mr-2" />
                     Done
                 </label>
                 <div className={`w-[15px] h-[15px] rounded-full`} style={{background: data.color}}></div>

@@ -107,7 +107,8 @@ let temp;
         
         case TASK_COMPLETED: 
           temp = [...state.todos]
-          temp[action.payload.index].completed = action.payload.completed 
+          const index = temp.findIndex(objectId => objectId.id === action.payload.id)
+          temp[index].completed = action.payload.completed 
         return {
           ...state,
           todos: temp
