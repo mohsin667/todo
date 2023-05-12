@@ -73,7 +73,6 @@ let temp;
           color: action.payload.color,
           pop: false
         })
-        localStorage.setItem("todo",JSON.stringify(temp))
         return {
           ...state,
           todos : temp,

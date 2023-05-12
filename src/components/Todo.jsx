@@ -36,7 +36,6 @@ function Todo() {
         const filteredTodos = todos.filter(f=> f.priority === selectedFilter)
         setState(filteredTodos)
       }
-
     }
   },[selectedFilter,todos])
   return (

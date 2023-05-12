@@ -7,7 +7,7 @@ function TopNav() {
   return (
     <div className='text-[50px] mb-6 flex items-center justify-between'>
       <h1 className='font-bold'>Todo</h1> 
-     <div onClick={()=> dispatch(openDialogAction())} className='cursor-pointer'><FiPlus /></div>
+      <div onClick={()=> dispatch(openDialogAction())} className='cursor-pointer'><FiPlus /></div>
     </div>
   )
 }
