@@ -15,6 +15,7 @@ function Todo() {
   }
   const {todos,selectedFilter} = useSelector((store)=>store.todos);
   const [state,setState] = useState(todos)
+  const [popUpIndex,setPopUpIndex] = useState(null)
   const handleChange = (e,index) => {
     dispatch(taskCompleted({completed: e.target.checked,index}))
   }
@@ -47,8 +48,8 @@ function Todo() {
               <h3 className={`${data.completed ? 'line-through': ""}`}>{data.title}</h3>
                 <div className='relative flex items-center gap-1'>
                   <RiDeleteBin6Line className='text-[18px] cursor-pointer' onClick={()=> handleDelete(data.id)} />
-                  <SlOptionsVertical onClick={()=> handlePop(index)} className='cursor-pointer' />
-                  {data.pop && <Edit id={index} />}
+                  <SlOptionsVertical onClick={()=> setPopUpIndex(index)} className='cursor-pointer' />
+                  {index == popUpIndex && <Edit id={index} setPopUpIndex={setPopUpIndex} />}
                 </div>
               </div>
               <p>{data.description}</p>
@@ -64,7 +65,6 @@ function Todo() {
           
         }
       </div>
-      <Form />
     </>
   )
 }

@@ -14,12 +14,6 @@ export const editPopUpOpen = (id) => {
     }
 }
 
-export const editPopUpClose = (id) => {
-    return {
-        type: EDIT_POPUP_CLOSE,
-        payload: id
-    }
-}
 
 export const editTodo = (payload) => {
     return {

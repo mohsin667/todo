@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import {editPopUpClose,editTodo} from "../actions/todoAction"
+import {editTodo} from "../actions/todoAction"
 import {useDispatch,useSelector} from "react-redux"
-function Edit({id}) {
+function Edit({id,setPopUpIndex}) {
   const state = useSelector(state => state.todos.todos[id])
   const dispatch = useDispatch()
   const [title,setTitle] = useState(state.title)
@@ -19,7 +19,7 @@ function Edit({id}) {
         color = "#65cdaa"
     }
     dispatch(editTodo({...state,title,description,color,index:id}))
-    dispatch(editPopUpClose(id))
+    setPopUpIndex(null)
   }
   return (
     <div className='absolute bg-white p-3 right-0 rounded-md top-[30px] shadow-md z-[99]'>
@@ -44,9 +44,8 @@ function Edit({id}) {
       </label>
 
       <button className='bg-blue-400 hover:bg-blue-600 text-white px-3 py-2 rounded-md mr-2' onClick={handleEdit}>Change</button>
-      <button className='bg-slate-100 hover:bg-slate-600 hover:text-[#fff] px-3 py-2 rounded-md' onClick={()=> dispatch(editPopUpClose(id))}>Cancel</button>
+      <button className='bg-slate-100 hover:bg-slate-600 hover:text-[#fff] px-3 py-2 rounded-md' onClick={()=> setPopUpIndex(null)}>Cancel</button>
     </div>
   )
 }
-
 export default Edit
