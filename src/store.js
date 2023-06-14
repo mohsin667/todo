@@ -1,14 +1,14 @@
-import { createStore } from "redux";
-import rootReducer from "./reducers"
-import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
+import createSagaMiddleware from 'redux-saga';
+import { configureStore } from '@reduxjs/toolkit';
+import todoSlice from './reducers/todoSlice'
+import initialLoad from './sagas'
 
-const persistConfig = {
-    key: 'root',
-    storage,
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-export  const store = createStore(persistedReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-export const persistor = persistStore(store)
+const saga = createSagaMiddleware();
+const store = configureStore({
+    reducer: {
+        todos: todoSlice
+    },
+    middleware: [saga]
+})
+saga.run(initialLoad)
+export default store;

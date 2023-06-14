@@ -1,7 +1,6 @@
 import React,{useState} from 'react'
-import {todoAction} from "../actions/todoAction";
-import {closeDialogAction} from "../actions/dialogAction"
-import { useDispatch ,useSelector} from 'react-redux';
+import {addTodo} from "../reducers/todoSlice";
+import { useDispatch} from 'react-redux';
 
 function Form({setDialog}) {
   const [title,setTitle] = useState("")
@@ -30,10 +29,9 @@ function Form({setDialog}) {
         description: description,
         priority: priority,
         color: color,
-        pop: false,
         completed: false
     }
-    dispatch(todoAction(obj))
+    dispatch(addTodo(obj))
     setDialog(false)
   }
   return (

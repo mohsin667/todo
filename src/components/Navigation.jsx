@@ -3,9 +3,10 @@ import {BsCheckCircleFill} from "react-icons/bs"
 import {TiThSmallOutline} from "react-icons/ti"
 import {filterAction} from "../actions/todoAction"
 import { useDispatch } from 'react-redux'
+import {filter} from "../reducers/todoSlice"
 function Navigation() {
   const dispatch = useDispatch()
-  const filter = [
+  const links = [
     {
       title: "All",
       color: "#65cdaa",
@@ -34,14 +35,14 @@ function Navigation() {
   ]
 
   const handleFilter = (id) => {
-    dispatch(filterAction(id))
+    dispatch(filter(id))
   }
 
   return (
     <>
     <nav>
         <ul className='flex gap-[10px] md:gap-[0] flex-wrap md:flex-col'>
-            {filter.map((list,index)=> {
+            {links.map((list,index)=> {
               if(list.title === "All") {
                 return <li key={index} onClick={()=> handleFilter(list.priority)} className='flex p-2 gap-2 md:my-[7.5px] items-center bg-gray-100 rounded-md text-slate-950 cursor-pointer'>
                 <div style={{background: `${list.color}`}} className={`w-6 h-6 rounded-full flex items-center justify-center`}><TiThSmallOutline color="white" /></div>
